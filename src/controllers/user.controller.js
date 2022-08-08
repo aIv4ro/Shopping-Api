@@ -32,6 +32,7 @@ export const patchUser = (req, res) => {
 
 export const deleteUser = (req, res) => {
   const {id} = req.params;
+
   remove(id)
     .then(user => res.send(user))
     .catch(err => res.status(404).send(err));

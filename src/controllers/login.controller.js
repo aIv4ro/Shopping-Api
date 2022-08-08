@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import { findUserByEmail } from '../services/user.service.js';
+import jwt from 'jsonwebtoken';
 
 export const login = async (req, res) => {
   const {email, password} = req.body;
@@ -12,5 +13,7 @@ export const login = async (req, res) => {
     return res.status(401).send({error: 'invalid user or password'});
   }
 
-  res.send(user);
+  const token = jwt.sign({'id': user.id}, process.env.SECRET_TOKEN);
+
+  res.send({token});
 };
