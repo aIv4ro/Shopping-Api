@@ -10,13 +10,13 @@ export const find = async () => {
   return res;
 }
 
-export const create = async (user) => {
+export const create = async user => {
   const res = await User.create(user);
   return res;
 }
 
-export const update = async (id, updatedUser) => {
-  const res = await User.findByIdAndUpdate(id, updatedUser);
+export const update = async (id, updatedFields) => {
+  const res = await User.findByIdAndUpdate(id, updatedFields, {new: true});
   return res;
 }
 

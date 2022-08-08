@@ -16,20 +16,22 @@ export const getAllUsers = (req, res) => {
 export const postUser = (req, res) => {
   const {user} = req.body;
   create(user)
-    .then(user => res.send(user))
+    .then(newUser => res.send(newUser))
     .catch(err => res.status(404).send(err));
 };
 
-export const updateUser = (req, res) => {
-  const {user} = req.body;
-  update(user)
-    .then(user => res.send(user))
+export const patchUser = (req, res) => {
+  const {updatedFields} = req.body;
+  const {id} = req.params;
+
+  update(id, updatedFields)
+    .then(updatedUser => res.send(updatedUser))
     .catch(err => res.status(404).send(err));
-}
+};
 
 export const deleteUser = (req, res) => {
   const {id} = req.params;
   remove(id)
     .then(user => res.send(user))
     .catch(err => res.status(404).send(err));
-}
+};
