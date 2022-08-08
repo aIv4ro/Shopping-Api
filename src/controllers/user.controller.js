@@ -13,8 +13,9 @@ export const getAllUsers = (req, res) => {
     .catch(err => res.status(404).send(err));
 };
 
-export const postUser = (req, res) => {
+export const postUser = async (req, res) => {
   const {user} = req.body;
+
   create(user)
     .then(newUser => res.send(newUser))
     .catch(err => res.status(404).send(err));
