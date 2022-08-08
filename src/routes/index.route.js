@@ -1,4 +1,4 @@
-import Express from "express";
+import Express from 'express';
 import userRouter from './user.route.js';
 import loginRouter from './login.route.js';
 

@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
-import { capitalize } from "../utils/capitalize.js";
-import { emailRegex } from "../utils/regex.js";
+import mongoose from 'mongoose';
+import { capitalize } from '../utils/capitalize.js';
+import { emailRegex } from '../utils/regex.js';
 
 const UserSchema = new mongoose.Schema({
   email: {
