@@ -11,15 +11,15 @@ const OrderSchema = new mongoose.Schema({
     ref: 'User',
     required: [true, 'To user is required']
   },
-  productsQuantities: [{
-    product: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Product'
-    },
-    quantity: {
-      type: Number,
-    }
-  }]
+  orderProducts: {
+    type: [
+      { 
+        product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
+        quantity: { type: Number, required: true }
+      }
+    ],
+    default: []
+  }
 });
 
 OrderSchema.virtual('id').get(function() { return this._id.toString(); });

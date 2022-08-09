@@ -1,15 +1,18 @@
 import {findById, find, create, update, remove} from '../services/order.service.js';
+import { populateOrder } from '../utils/populateOrder.js';
 
 export const getOrderFromId = (req, res) => {
   const {id} = req.params;
   findById(id)
-    .then(order => res.send(order))
+    .then(order => populateOrder(order))
+    .then(populatedOrder => res.send(populatedOrder))
     .catch(err => res.status(404).send(err));
 }; 
 
 export const getAllOrders = (req, res) => {
   find()
-    .then(orders => res.send(orders))
+    .then(orders => Promise.all(orders.map(order => populateOrder(order))))
+    .then(populatedOrders => res.send(populatedOrders))
     .catch(err => res.status(404).send(err));
 };
 
@@ -17,7 +20,8 @@ export const postOrder = async (req, res) => {
   const {order} = req.body;
 
   create(order)
-    .then(newOrder => res.send(newOrder))
+    .then(newOrder => populateOrder(newOrder))
+    .then(newOrderPopulated => res.send(newOrderPopulated))
     .catch(err => res.status(404).send(err));
 };
 
@@ -26,7 +30,8 @@ export const patchOrder = (req, res) => {
   const {id} = req.params;
 
   update(id, updatedFields)
-    .then(updatedOrder => res.send(updatedOrder))
+    .then(updatedOrder => populateOrder(updatedOrder))
+    .then(updatedOrderPopulated => res.send(updatedOrderPopulated))
     .catch(err => res.status(404).send(err));
 };
 
