@@ -1,4 +1,11 @@
-import { create } from '../services/user.service.js';
+import { create, findAllEmails } from '../services/user.service.js';
+
+export const getAllEmails = (req, res) => {
+  findAllEmails()
+    .then(emails => res.send(emails))
+    .catch(err => res.status(404).send(err));
+};
+
 
 export const register = async (req, res) => {
   const {email, hashedPassword, name, surname} = req.body;

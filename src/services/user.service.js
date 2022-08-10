@@ -29,3 +29,8 @@ export const findUserByEmail = async email => {
   const user = await User.findOne({'email': {$eq: email}});
   return user;
 };
+
+export const findAllEmails = async () => {
+  const users = await find();
+  return users.map(user => user.email);
+};
