@@ -1,5 +1,14 @@
 import {findById, find, create, update, remove} from '../services/user.service.js';
 
+export const getUserFromToken = (req, res) => {
+  const id = req.userId;
+  console.log(id);
+
+  findById(id)
+    .then(user => res.send(user))
+    .catch(err => res.status(404).send(err));
+};
+
 export const getUserFromId = (req, res) => {
   const {id} = req.params;
   findById(id)

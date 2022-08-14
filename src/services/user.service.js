@@ -1,12 +1,12 @@
 import { User } from '../models/user.model.js';
 
 export const findById = async id => {
-  const user = await User.findById(id);
+  const user = await User.findById(id, '-hashedPassword');
   return user;
 };
 
 export const find = async () => {
-  const users = await User.find();
+  const users = await User.find({}, '-hashedPassword');
   return users;
 };
 

@@ -37,3 +37,9 @@ export const deleteProduct = (req, res) => {
     .then(product => res.send(product))
     .catch(err => res.status(404).send(err));
 };
+
+export const searchProducts = (req, res) => {
+  find({...req.query})
+    .then(products => res.send(products))
+    .catch(err => res.status(404).send(err));
+};

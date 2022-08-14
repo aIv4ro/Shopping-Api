@@ -23,7 +23,8 @@ const UserSchema = new mongoose.Schema({
   hashedPassword: {
     type: String,
     required: [true, 'Password is required'],
-  }
+  },
+  devices: [String]
 });
 
 UserSchema.virtual('id').get(function() { return this._id.toString(); });

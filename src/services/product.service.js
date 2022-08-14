@@ -5,8 +5,8 @@ export const findById = async id => {
   return product;
 };
 
-export const find = async () => {
-  const product = await Product.find();
+export const find = async ({offset = 0, limit = 0} = {}) => {
+  const product = await Product.find().sort('name').skip(offset).limit(limit);
   return product;
 };
 
