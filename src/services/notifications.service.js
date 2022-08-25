@@ -22,6 +22,5 @@ export const notifiyOrder = (order, devices) => {
       'Authorization': `Bearer ${process.env.FIREBASE_MESSAGING_KEY}`
     },
     body: JSON.stringify(message)
-  }).then(res => console.log(res))
-    .catch(err => console.log(err));
+  }).catch(err => console.log(err));
 };

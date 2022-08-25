@@ -2,7 +2,6 @@ import {findById, find, create, update, remove} from '../services/user.service.j
 
 export const getUserFromToken = (req, res) => {
   const id = req.userId;
-  console.log(id);
 
   findById(id)
     .then(user => res.send(user))
