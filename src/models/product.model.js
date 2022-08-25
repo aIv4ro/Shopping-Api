@@ -6,7 +6,15 @@ const ProductSchema = mongoose.Schema({
     type: String,
     required: [true, 'Product is required']
   },
-  description: { type: String }
+  description: { type: String },
+  unit: {
+    type: String,
+    default: 'u'
+  },
+  increment: {
+    type: Number,
+    default: 1.0
+  }
 });
 
 ProductSchema.virtual('id').get(function() { return this._id.toString(); });

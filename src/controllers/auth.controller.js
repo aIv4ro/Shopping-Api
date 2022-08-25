@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import { findUserByEmail, findById } from '../services/user.service.js';
+import { create, findAllEmails } from '../services/user.service.js';
 import jwt from 'jsonwebtoken';
 
 export const login = async (req, res) => {
@@ -15,7 +16,7 @@ export const login = async (req, res) => {
 
   const {device} = req.body;
 
-  if(device) {
+  if(device && !user.devices.includes(device)) {
     user.devices.push(device);
     user.save();
   }
@@ -37,4 +38,18 @@ export const logout = async (req, res) => {
   }
 
   res.send({message: 'Logged out'});
+};
+
+export const getAllEmails = (req, res) => {
+  findAllEmails()
+    .then(emails => res.send(emails))
+    .catch(err => res.status(404).send(err));
+};
+
+
+export const register = async (req, res) => {
+  const {email, hashedPassword, name, surname} = req.body;
+  create({email, hashedPassword, name, surname})
+    .then(user => res.send(user))
+    .catch(err => res.status(409).send({message: err.message}));
 };
