@@ -1,4 +1,6 @@
+import { notifiyOrder } from '../services/notifications.service.js';
 import {findById, find, create, update, remove} from '../services/order.service.js';
+import { getUserDevices } from '../services/user.service.js';
 import { populateOrder } from '../utils/populateOrder.js';
 
 export const getOrderFromId = (req, res) => {
@@ -21,7 +23,10 @@ export const postOrder = async (req, res) => {
 
   create(order)
     .then(newOrder => populateOrder(newOrder))
-    .then(newOrderPopulated => res.send(newOrderPopulated))
+    .then(order => {
+      getUserDevices(order.toUser.id).then(devices => notifiyOrder(order, devices));
+      return res.send(order);
+    })
     .catch(err => res.status(404).send(err));
 };
 

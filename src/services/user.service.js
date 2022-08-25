@@ -34,3 +34,8 @@ export const findAllEmails = async () => {
   const users = await find();
   return users.map(user => user.email);
 };
+
+export const getUserDevices = async id => {
+  const {devices} = await findById(id);
+  return devices;
+};
