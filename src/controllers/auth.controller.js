@@ -31,6 +31,7 @@ export const logout = async (req, res) => {
 
   if(device) {
     const deviceIndex = user.devices.indexOf(device);
+    
     if(deviceIndex != -1) {
       user.devices.splice(deviceIndex, 1);
       user.save();
