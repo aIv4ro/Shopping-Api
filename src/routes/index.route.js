@@ -7,6 +7,7 @@ import { auth } from '../middlewares/auth.js';
 
 const router = Express.Router();
 
+router.use('/', (req, res) => res.send('Welcom to Shopping'));
 router.use('/api/auth', authRouter);
 router.use('/api/user', auth, userRouter);
 router.use('/api/product', auth, productRouter);
