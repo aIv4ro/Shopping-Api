@@ -1,2 +1,5 @@
 import dotenv from 'dotenv';
-dotenv.config();
+import path from 'path';
+
+const envPath = path.resolve(`./.env.${process.env.NODE_ENV}`).trim();
+dotenv.config({ path: envPath });
