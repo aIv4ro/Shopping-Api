@@ -14,6 +14,9 @@ const ProductSchema = mongoose.Schema({
   increment: {
     type: Number,
     default: 1.0
+  },
+  image: {
+    type: String
   }
 });
 
